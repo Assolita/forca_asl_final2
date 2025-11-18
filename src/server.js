@@ -42,7 +42,7 @@ app.use('/api', salasRouter);
 
 const gamesRouter = require('./routes/games');
 const playersRouter = require('./routes/players');
-app.use('/api/games', gamesRouter);
+app.use('/api', gamesRouter);
 app.use('/api/players', playersRouter);
 
 const resultsRouter = require('./routes/results.routes');
