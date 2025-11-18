@@ -1,7 +1,7 @@
 // controllers/gameController.js
 const { getNovaPalavra } = require('../services.js');
 const { Game } = require('../game.js');
-const { models } = require('../models').default;
+const { models } = require('../models');
 
 // Variável global para manter o jogo atual (por enquanto)
 let jogoAtual = null;
