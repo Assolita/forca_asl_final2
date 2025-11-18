@@ -1,6 +1,5 @@
-// src/db/sequelize.js
 const { Sequelize } = require('sequelize');
-require('dotenv').config();
+require('dotenv').config(); // Carrega o .env
 
 const {
   DB_HOST,
@@ -15,24 +14,15 @@ const sequelize = new Sequelize(DB_NAME, DB_USER, DB_PASS, {
   host: DB_HOST,
   port: DB_PORT,
   dialect: DB_DIALECT,
-
-  // 🔥 Supabase + pgBouncer
+  
+  // --- ADICIONE ISTO PARA O SUPABASE ---
+  // O Supabase (e qualquer banco na nuvem) exige SSL
   dialectOptions: {
     ssl: {
       require: true,
-      rejectUnauthorized: false
-    },
-    keepAlive: true
-  },
-
-  // 🔥 Importante! pgBouncer NÃO aceita muitos connections
-  pool: {
-    max: 1,
-    min: 0,
-    idle: 10000
-  },
-
-  logging: false
+      rejectUnauthorized: false // (Necessário para a maioria das conexões)
+    }}
+  // ------------------------------------
 });
 
 module.exports = { sequelize };
