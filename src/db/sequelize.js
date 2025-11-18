@@ -1,6 +1,6 @@
 // src/db/sequelize.js
 const { Sequelize } = require('sequelize');
-require('.env').config();
+require('dotenv').config();
 
 const {
   DB_HOST,
