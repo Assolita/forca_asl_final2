@@ -6,15 +6,16 @@ const { models } = require('../models');
 // Variável global para manter o jogo atual (por enquanto)
 let jogoAtual = null;
 
-function iniciarNovoJogo(player1Id, player2Id) {
+async function iniciarNovoJogo(player1Id, player2Id) {
     console.log("Controller: Criando novo jogo...");
     const { palavra, categoria } = getNovaPalavra();
-    jogoAtual = new Game(palavra, categoria, player1Id, player2Id); // se o construtor aceitar
+    jogoAtual = new Game(palavra, categoria, player1Id, player2Id);
+
     try {
         await models.GameM.create({
             word: palavra,
             player1_id: player1Id,
-            player2_id: player2Id,    
+            player2_id: player2Id,
             turno_atual: 1,
             estado: jogoAtual.getEstado(),
             status_final: null,
@@ -26,6 +27,7 @@ function iniciarNovoJogo(player1Id, player2Id) {
 
     return jogoAtual.getEstado();
 }
+
 
 
 
