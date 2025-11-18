@@ -1,3 +1,5 @@
+// src/db/sequelize.js (Este é o arquivo que você deve alterar)
+
 const { Sequelize } = require('sequelize');
 require('dotenv').config(); // Carrega o .env
 
