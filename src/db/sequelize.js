@@ -46,7 +46,7 @@ const sequelize = new Sequelize(
       }
     },
     pool: {
-      max: 1,  // obrigatório para pgBouncer
+      max: 3,  // obrigatório para pgBouncer
       min: 0,
       acquire: 30000,
       idle: 10000
