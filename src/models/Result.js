@@ -12,7 +12,10 @@ class Result extends Model {
         attempts: { type: DataTypes.INTEGER, allowNull: false, defaultValue: 0 },
         errors: { type: DataTypes.INTEGER, allowNull: false, defaultValue: 0 },
         points: { type: DataTypes.INTEGER, allowNull: false, defaultValue: 0 },
-        duration_ms: { type: DataTypes.INTEGER, allowNull: true }
+        duration_ms: { type: DataTypes.INTEGER, allowNull: true },
+        sala_id: {  type: DataTypes.INTEGER,  allowNull: true,
+          references: {model: 'salas',    key: 'id'}
+        }
       },
       { sequelize, modelName: 'Result', tableName: 'results' }
     );

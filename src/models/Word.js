@@ -16,7 +16,8 @@ class Word extends Model {
     return Word;
   }
   static associate(models) {
-    Word.belongsTo(models.Category, { foreignKey: 'category_id', as: 'category' });
+    this.belongsTo(models.Category, { foreignKey: 'category_id', as: 'category' });
+    this.hasMany(models.Result, { foreignKey: 'word_id', as: 'results' });
   }
 }
 module.exports = Word;

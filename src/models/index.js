@@ -17,9 +17,13 @@ models.Result = Result.initModel(sequelize);
 models.Sala = Sala.initModel(sequelize);
 models.GameM = GameM.initModel(sequelize);
 
-GameM.associate?.(models);
-Word.associate?.(models);
-Result.associate?.(models);
+
+Object.values(models).forEach(model => {
+  if (typeof model.associate === 'function') {
+    model.associate(models);
+  }
+});
+
 models.Category.hasMany(models.Word, { foreignKey: 'category_id', as: 'words' });
 
 module.exports = { sequelize, models };

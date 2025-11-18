@@ -1,48 +1,29 @@
-const { DataTypes } = require('sequelize');
+const { Model, DataTypes } = require('sequelize');
 
-class Game {
+class GameM extends Model {
   static initModel(sequelize) {
-    const GameModel = sequelize.define('Game', {
-      word: {
-        type: DataTypes.STRING,
-        allowNull: false
-      },
-      player1_id: {
-        type: DataTypes.INTEGER,
-        allowNull: false
-      },
-      player2_id: {
-        type: DataTypes.INTEGER,
-        allowNull: false
-      },
-      turno_atual: {
-        type: DataTypes.INTEGER, // 1 ou 2
-        defaultValue: 1
-      },
-      estado: {
-        type: DataTypes.TEXT, // estado serializado (letras, erros etc.)
-        defaultValue: ''
-      },
-      status_final: {
-        type: DataTypes.STRING, // 'vitoria' | 'derrota' | 'cancelada'
-        allowNull: true
-      },
-      vencedor_id: {
-        type: DataTypes.INTEGER,
-        allowNull: true
-      }
+    GameM.init({
+      word: { type: DataTypes.STRING, allowNull: false },
+      player1_id: { type: DataTypes.INTEGER, allowNull: false },
+      player2_id: { type: DataTypes.INTEGER, allowNull: false },
+      turno_atual: { type: DataTypes.INTEGER, defaultValue: 1 },
+      estado: { type: DataTypes.TEXT, defaultValue: '' },
+      status_final: { type: DataTypes.STRING, allowNull: true },
+      vencedor_id: { type: DataTypes.INTEGER, allowNull: true }
     }, {
-      tableName: 'games'
+      sequelize,
+      tableName: 'games',
+      modelName: 'GameM'
     });
-    return GameModel;
+    return GameM;
   }
 
   static associate(models) {
-    // Se quiser: relacionar com Player
-    Game.belongsTo(models.Player, { as: 'player1', foreignKey: 'player1_id' });
-    Game.belongsTo(models.Player, { as: 'player2', foreignKey: 'player2_id' });
+    this.belongsTo(models.Player, { as: 'player1', foreignKey: 'player1_id' });
+    this.belongsTo(models.Player, { as: 'player2', foreignKey: 'player2_id' });
+    this.belongsTo(models.Sala, { foreignKey: 'sala_id', as: 'sala' }); // opcional
   }
 }
 
-module.exports = Game;
+module.exports = GameM;
 
