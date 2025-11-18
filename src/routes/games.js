@@ -8,7 +8,7 @@ const auth = require('../middleware/auth');
 router.post('/novo-jogo', (req, res) => {
     try {
         const { player1Id, player2Id } = req.body; // IDs enviados pelo cliente
-        const estadoDoJogo = iniciarNovoJogo({ player1Id, player2Id });
+        const estadoDoJogo = await gameController.iniciarNovoJogo(player1Id, player2Id);
         res.status(201).json(estadoDoJogo); // 201 Created
     } catch (error) {
         console.error("Erro em POST /novo-jogo:", error.message);
