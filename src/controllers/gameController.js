@@ -6,12 +6,13 @@ const { models } = require('../models');
 // Variável global para manter o jogo atual (por enquanto)
 let jogoAtual = null;
 
-function iniciarNovoJogo() {
+function iniciarNovoJogo(player1Id, player2Id) {
     console.log("Controller: Criando novo jogo...");
     const { palavra, categoria } = getNovaPalavra();
-    jogoAtual = new Game(palavra, categoria);
+    jogoAtual = new Game(palavra, categoria, player1Id, player2Id); // se o construtor aceitar
     return jogoAtual.getEstado();
 }
+
 
 
 // Certifique-se de que este controller tenha:
