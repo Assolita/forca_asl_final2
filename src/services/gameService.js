@@ -1,4 +1,4 @@
-const { Partida, Rodada, Word } = require('../models').default;
+const { Partida, Rodada, Word } = require('../models');
 
 async function startPartida({ player1_id, player2_id, wordId }) {
   const word = await Word.findByPk(wordId);
